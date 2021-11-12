@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 const bcrypt = require('bcryptjs');
+const { Database } = require('sqlite3');
 
 function hashFunction(password) {
     return bcrypt.hash(password, 10);
@@ -24,6 +25,12 @@ router.post('/', async function(req, res) {
     theFileAsJSON.push(data);
     let theFileAsJSONAsString = JSON.stringify(theFileAsJSON);
     fs.writeFileSync('users.json', theFileAsJSONAsString);
+
+    let user = [{
+        username: req.body.username,
+        password: req.body.password
+    }];
+    database_functions.createUser(user);
 
     res.render('AccountCreated');
 });

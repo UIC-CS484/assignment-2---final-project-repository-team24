@@ -10,20 +10,19 @@ let db = new sqlite3.Database('./theDatabase.sqlite', (err) => {
 	  throw err
 	}else{
 		//Successful database connection
-		console.log('Connected to the SQLite database.') 
+		console.log('Connected to the SQLite database.') 	
 	}
 });
 
+let createUser = (user) =>{
+	var createUserSql ='INSERT INTO PROSPECTIVE_USER (username, password) VALUES (?,?)'
+	var params =[user.username, user.password];
 
-let createProfile = (profile) =>{
-	var createProfileSql ='INSERT INTO PROSPECTIVE_PROFILE (prof_id, prof_firstname,prof_lastname, prof_address, prof_decision_date, prof_email, prof_password, prof_phone, prof_rent_range, prof_image_url, prof_class_num) VALUES (?,?,?,?,?,?,?,?,?,?,?)'
-	var params =[null, profile.firstName, profile.lastName, null, profile.move_date, profile.userEmail, profile.user_password, null, profile.user_rent_range, './images/user_profile_images/generic_profile_img.png', null];
-
-	db.run(createProfileSql, params, function(err){
+	db.run(createUserSql, params, function(err){
 		if (err){
 			return console.log(err.message);
 		}
-		console.log("Profile Created");
+		console.log("User Created");
 		console.log(`Rows inserted ${this.changes}`);	  
 	});
 }
