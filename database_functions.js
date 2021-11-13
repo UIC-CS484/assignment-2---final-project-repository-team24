@@ -12,6 +12,8 @@ let db = new sqlite3.Database('./theDatabase.sqlite', (err) => {
 		//Successful database connection
 		console.log('Connected to the SQLite database.') 	
 	}
+	//db.run("CREATE TABLE ? (? STRING, ? STRING, PRIMARY KEY(?))", ["PROSPECTIVE_USER", "username", "password", "username"]);
+	db.run("CREATE TABLE PROSPECTIVE_USER (username STRING, password STRING, PRIMARY KEY(username))");
 });
 
 let createUser = (user) =>{
@@ -26,3 +28,5 @@ let createUser = (user) =>{
 		console.log(`Rows inserted ${this.changes}`);	  
 	});
 }
+
+module.exports = {createUser};

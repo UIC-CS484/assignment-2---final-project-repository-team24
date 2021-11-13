@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 const bcrypt = require('bcryptjs');
 const { Database } = require('sqlite3');
+var databaseFunction = require("../database_functions.js");
 
 function hashFunction(password) {
     return bcrypt.hash(password, 10);
@@ -30,7 +31,7 @@ router.post('/', async function(req, res) {
         username: req.body.username,
         password: req.body.password
     }];
-    database_functions.createUser(user);
+    databaseFunction.createUser(user);
 
     res.render('AccountCreated');
 });
