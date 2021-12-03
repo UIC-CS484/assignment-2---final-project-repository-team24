@@ -29,7 +29,7 @@ router.post('/', async function(req, res) {
 
     let user = [{
         username: req.body.username,
-        password: req.body.password
+        password: hashedPassword
     }];
     databaseFunction.createUser(user);
 
